@@ -9,8 +9,8 @@ async function main() {
     console.log("Creating schedules with account:", deployer.address);
 
     // Paste your deployed contract addresses here
-    const tokenAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-    const vestingAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+    const tokenAddress = "YOUR_DEPLOYED_TOKEN_ADDRESS_HERE";
+    const vestingAddress = "YOUR_DEPLOYED_VESTING_ADDRESS_HERE";
 
     // Get contract instances
     const token = await hre.ethers.getContractAt("SampleToken", tokenAddress);
@@ -20,21 +20,21 @@ async function main() {
     // Fill in real beneficiary addresses and amounts for your client
     const schedules = [
         {
-            beneficiary: "0xbDA5747bFD65F08deb54cb465eB87D40e51B197E",
+            beneficiary: "BENEFICIARY_ADDRESS_1",
             amount: hre.ethers.utils.parseEther("10000"),
             start: Math.floor(Date.now() / 1000),              // starts now
             cliffDuration: 180 * 24 * 60 * 60,                 // 6 months in seconds
             duration: 730 * 24 * 60 * 60                        // 2 years in seconds
         },
         {
-            beneficiary: "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
+            beneficiary: "BENEFICIARY_ADDRESS_2",
             amount: hre.ethers.utils.parseEther("5000"),
             start: Math.floor(Date.now() / 1000),              // starts now
             cliffDuration: 90 * 24 * 60 * 60,                  // 3 months in seconds
             duration: 365 * 24 * 60 * 60                        // 1 year in seconds
         },
         {
-            beneficiary: "0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199",
+            beneficiary: "BENEFICIARY_ADDRESS_3",
             amount: hre.ethers.utils.parseEther("8000"),
             start: Math.floor(Date.now() / 1000),              // starts now
             cliffDuration: 365 * 24 * 60 * 60,                 // 1 year in seconds
