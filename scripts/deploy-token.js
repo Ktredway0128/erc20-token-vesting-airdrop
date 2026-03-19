@@ -1,6 +1,3 @@
-// SPDX-License-Identifier: MIT
-// Deploy script for SampleToken using Hardhat
-
 const hre = require("hardhat");
 
 async function main() {
@@ -18,6 +15,19 @@ async function main() {
     await token.deployed();
 
     console.log("SampleToken deployed to:", token.address);
+
+    // Wait for a few block confirmations before verifying
+    console.log("Waiting for block confirmations...");
+    await token.deployTransaction.wait(5);
+
+    // Verify on Etherscan
+    console.log("Verifying contract on Etherscan...");
+    await hre.run("verify:verify", {
+        address: token.address,
+        constructorArguments: [name, symbol, cap, initialSupply],
+    });
+
+    console.log("Contract verified!");
 }
 
 main().catch((error) => {

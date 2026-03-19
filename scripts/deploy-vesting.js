@@ -1,34 +1,32 @@
-// SPDX-License-Identifier: MIT
-// Deploy script for TokenVesting using Hardhat
-
-// Import Hardhat runtime environment
 const hre = require("hardhat");
 
 async function main() {
-    // Get deployer account
     const [deployer] = await hre.ethers.getSigners();
-
-    // Show which account deploys
     console.log("Deploying contract with account:", deployer.address);
 
-    // Get contract factory
     const TokenVesting = await hre.ethers.getContractFactory("TokenVesting");
 
-    // The token address that this vesting contract will manage
-    // Replace this with your deployed SampleToken address
-    const tokenAddress = "YOUR_DEPLOYED_TOKEN_ADDRESS_HERE";
+    const tokenAddress = "0x036150039c33b1645080a9c913f96D4c65ccca48";
 
-    // Deploy the contract
     const vesting = await TokenVesting.deploy(tokenAddress);
-
-    // Wait until deployment is confirmed
     await vesting.deployed();
 
-    // Show deployed contract address
     console.log("TokenVesting deployed to:", vesting.address);
+
+    // Wait for block confirmations before verifying
+    console.log("Waiting for block confirmations...");
+    await vesting.deployTransaction.wait(5);
+
+    // Verify on Etherscan
+    console.log("Verifying contract on Etherscan...");
+    await hre.run("verify:verify", {
+        address: vesting.address,
+        constructorArguments: [tokenAddress],
+    });
+
+    console.log("Contract verified!");
 }
 
-// Run main and handle errors
 main().catch((error) => {
     console.error(error);
     process.exitCode = 1;
