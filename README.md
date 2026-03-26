@@ -116,6 +116,18 @@ Admins can revoke a vesting schedule at any time.
 Unvested tokens are returned to the contract upon revocation.
 Tokens that vested before revocation remain claimable by the beneficiary.
 
+The exact vested amount is frozen at the moment of revocation using a
+vestedAtRevocation field stored on the schedule. This prevents the releasable
+amount from continuing to climb after revocation, ensuring beneficiaries can
+only ever claim what was legitimately vested before the schedule was cancelled.
+
+ACTIVE SCHEDULE TRACKING
+
+The contract tracks the number of currently active vesting schedules via
+activeSchedulesCount. This counter increments when a schedule is created,
+decrements immediately when a schedule is revoked, and decrements when a
+beneficiary releases their final tokens on a completed schedule.
+
 ### MERKLE AIRDROP
 
 MERKLE PROOF VERIFICATION
@@ -304,10 +316,10 @@ Output the deployed contract address
 | Contract | Address | Etherscan |
 |----------|---------|-----------|
 | SampleToken | `0x036150039c33b1645080a9c913f96D4c65ccca48` | [View on Etherscan](https://sepolia.etherscan.io/address/0x036150039c33b1645080a9c913f96D4c65ccca48#code) |
-| TokenVesting | `0x2922Ff891f0EFC440765AD53fb85482694783781` | [View on Etherscan](https://sepolia.etherscan.io/address/0x2922Ff891f0EFC440765AD53fb85482694783781#code) |
+| TokenVesting | `0x81F71D5D73383750C9d4BCe65C493A55BA887ecB` | [View on Etherscan](https://sepolia.etherscan.io/address/0x81F71D5D73383750C9d4BCe65C493A55BA887ecB#code) |
 | TokenAirdrop | `0x1e79DE344A8B99CAF74E60dc1bD7cCE26e9f5524` | [View on Etherscan](https://sepolia.etherscan.io/address/0x1e79DE344A8B99CAF74E60dc1bD7cCE26e9f5524#code) |
 
-Deployed: 2026-03-19
+Deployed: 2026-03-26
 
 Merkle Root: `0x4b5c2800591b44919b0eadb6c6e42d649e0694a805266ae22df72091daafe0c6`
 
