@@ -19,6 +19,7 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
 
     uint256 public vestingSchedulesTotalAmount;
     uint256 public vestingSchedulesCount;
+    uint256 public activeSchedulesCount;
 
     struct VestingSchedule {
         bool initialized;
@@ -29,6 +30,7 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
         uint64 cliff;
         uint64 duration;
         bool revoked;
+        uint256 vestedAtRevocation; // frozen at revoke time, 0 if not revoked
     }
 
     mapping(bytes32 => VestingSchedule) private vestingSchedules;
@@ -98,11 +100,13 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
             start: start,
             cliff: cliff,
             duration: duration,
-            revoked: false
+            revoked: false,
+            vestedAtRevocation: 0
         });
 
         vestingSchedulesTotalAmount += amount;
         vestingSchedulesCount++;
+        activeSchedulesCount++;
         holdersVestingCount[beneficiary]++;
 
         emit VestingScheduleCreated(vestingId, beneficiary, amount);
@@ -128,8 +132,10 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
         require(amount > 0, "No tokens available");
 
         schedule.released += amount;
-        if (!schedule.revoked) {
-            vestingSchedulesTotalAmount -= amount;
+        vestingSchedulesTotalAmount -= amount;
+
+        if (schedule.released >= schedule.totalAmount && !schedule.revoked) {
+            activeSchedulesCount--;
         }
         
         token.safeTransfer(schedule.beneficiary, amount);
@@ -154,6 +160,10 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
 
         vestingSchedulesTotalAmount -= unvested;
 
+        activeSchedulesCount--;
+
+        schedule.vestedAtRevocation = vestedTotal;
+        
         schedule.revoked = true;
 
         emit VestingRevoked(vestingId, schedule.beneficiary, unvested);
@@ -168,6 +178,11 @@ contract TokenVesting is AccessControl, ReentrancyGuard {
         view
         returns (uint256)
     {
+        if (schedule.revoked) {
+            if (schedule.vestedAtRevocation <= schedule.released) return 0;
+            return schedule.vestedAtRevocation - schedule.released;
+        }
+        
         if (block.timestamp < schedule.cliff) {
             return 0;
         }
