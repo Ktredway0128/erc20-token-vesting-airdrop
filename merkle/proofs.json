@@ -3,19 +3,27 @@
     "amount": "100",
     "proof": [
       "0x1dab72cd2abb28bc5f6aaede396790459c806968735faa5c3c2095ba3d36605e",
-      "0xe671e7193024eb885af6456f8d757c1b8d426458c6caf4ec0de31418676fd355"
+      "0xfb0a9783a61acef3bf8536f8449e85cb2d99027b1ba9c1499b521646f22e060c"
     ]
   },
   "0xad08767a27bdbfe65d1d84f2ea79fa62a3009e9f": {
     "amount": "200",
     "proof": [
       "0xee211348b37ab38ce88d91eb0094a4e602cf4dee184df8e641779ee129ae6d78",
-      "0xe671e7193024eb885af6456f8d757c1b8d426458c6caf4ec0de31418676fd355"
+      "0xfb0a9783a61acef3bf8536f8449e85cb2d99027b1ba9c1499b521646f22e060c"
     ]
   },
   "0xadb85ce9ed1ef9eb649d308fc334c038e0cace9e": {
     "amount": "300",
     "proof": [
+      "0xfb0a9c7385377b238e8e0b29607893afc73876ee5bc8e98727ff9f460245b55e",
+      "0x39f0b697dda0a1d3327abbabf2479ac9d6147bfc69bd251c8a99c04cc9429a5d"
+    ]
+  },
+  "0x7419f66641ffa15b980601f9e28c65102471469b": {
+    "amount": "150",
+    "proof": [
+      "0xe671e7193024eb885af6456f8d757c1b8d426458c6caf4ec0de31418676fd355",
       "0x39f0b697dda0a1d3327abbabf2479ac9d6147bfc69bd251c8a99c04cc9429a5d"
     ]
   }

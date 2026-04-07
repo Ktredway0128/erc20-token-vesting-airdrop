@@ -6,7 +6,7 @@
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.19-blue)
 ![Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-yellow)
 
-Built by [Kyle Tredway Development](https://kyle-tredway-portfolio.netlify.app/) — professional Solidity smart contract packages for Web3 companies.
+Built by [Tredway Development](https://kyle-tredway-portfolio.netlify.app/) — professional Solidity smart contract packages for Web3 companies.
 
 A secure and production-ready ERC-20 token vesting and airdrop system built with Solidity, OpenZeppelin, and Hardhat.
 
