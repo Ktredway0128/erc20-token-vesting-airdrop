@@ -1,4 +1,4 @@
-# ERC-20 TOKEN VESTING & AIRDROP CONTRACT
+# TOKEN AIRDROP CONTRACT
 
 [![Verified on Etherscan](https://img.shields.io/badge/Etherscan-Verified-brightgreen)](https://sepolia.etherscan.io/address/0x1e79de344a8b99caf74e60dc1bd7cce26e9f5524#code)
 
@@ -244,9 +244,9 @@ This modular architecture provides strong security and reusable functionality wh
 
 ### CLONE THE REPOSITORY:
 
-git clone https://github.com/Ktredway0128/erc20-token-vesting-airdrop
+git clone https://github.com/Ktredway0128/token-airdrop
 
-cd erc20-token-vesting-airdrop
+cd token-airdrop
 
 ### INSTALL DEPENDENCIES:
 
